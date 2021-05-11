@@ -9,16 +9,21 @@ const user={email:"abhishek@gmail.com",password:"abhishek123"}
 
 function Login() {
   let history=useHistory();
+  if(sessionStorage.token){
+    history.push("/")
+  }
+
 const loginCheck=(e)=>{
   e.preventDefault()
   let email=e.target.elements[0].value;
   let password=e.target.elements[1].value;
   if(email===user.email && password===user.password){
     console.log("true")
-     history.push('/membersCorner')
+    sessionStorage.setItem("token",email)
+     history.push("/membersCorner")
   }
   else{
-    console.log("false")
+    alert("false")
   }
 }
     return (

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -7,7 +8,12 @@ import './MemberCorner.css'
 import MemberCard from './MemberCard';
 
 
+
 function MembersCorner() {
+    let history=useHistory()
+    if(!sessionStorage.token){
+        history.push("/login")
+      }
     const values={
         
            nav: true,
@@ -29,8 +35,8 @@ function MembersCorner() {
         }  
     return (
         <div>
-         <div class="container">
-      <div class="col-md-12">
+         <div clasName="container">
+      <div clasName="col-md-12">
           <h2 className="text-white align-left">Member's Corner</h2>
       </div>
       <OwlCarousel className='owl-theme' {...values} >
