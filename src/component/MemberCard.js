@@ -1,7 +1,9 @@
 import React from 'react'
 import img from '../images/member-cornor.png'
-function MemberCard() {
+function MemberCard(props) {
+
     return (
+      
         <>
            <div class="item">
         <div class="card" style={{width: '18rem'}}>
@@ -12,9 +14,9 @@ function MemberCard() {
           />
           <div class="card-body">
             <div>
-              <strong>Abhishek Patel</strong> <small>Presales</small>
+              <strong>{props.data.name}</strong>&nbsp; <small>Presales</small>
               <div>
-                <span class="location">Pune</span>
+                <span class="location">Pune</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="date">May,22,2020</span>
               </div>
             </div>

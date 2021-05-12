@@ -62,7 +62,7 @@ const loginCheck=(e)=>{
           <div className="form-field">
             <label className="form-label">Email</label>
             <div className="form-field">
-              <input type="text" className="form-control" placeholder="Your InfoBeans email address" />
+              <input type="text" className="form-control" placeholder="Your InfoBeans email address" required />
             </div>
           </div>
           <div className="form-field">
@@ -70,7 +70,7 @@ const loginCheck=(e)=>{
               >Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <a href="#">Forgot?</a></label>
             <div className="form-field">
-              <input type="text"  className="form-control" placeholder="Your password" />
+              <input type="password"  className="form-control" placeholder="Your password" required />
             </div>
           </div>
           <div className="form-field">

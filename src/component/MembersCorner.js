@@ -1,21 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './MemberCorner.css'
-
+import Navbar from './Navbar'
 import MemberCard from './MemberCard';
+import axios from 'axios';
 
 
 
 function MembersCorner() {
+
+
     let history=useHistory()
     if(!sessionStorage.token){
         history.push("/login")
       }
+     const[member,setmember]=useState([])
+     
+     useEffect(() => {
+         console.log("hello")
+        axios({
+            method:'get',
+            url:"http://localhost:3005/getuser"
+        }).then((response)=>{
+            console.log(response.data)
+            setmember(response.data)
+            
+        },(error)=>{
+            console.log("Error from api",error)
+        })
+     }, [])
     const values={
-        
+           
            nav: true,
            items: 3,
            loop:true,
@@ -33,27 +51,26 @@ function MembersCorner() {
        
        }
         }  
+       
     return (
-        <div>
+        <><Navbar/>
          <div clasName="container">
       <div clasName="col-md-12">
           <h2 className="text-white align-left">Member's Corner</h2>
       </div>
-      <OwlCarousel className='owl-theme' {...values} >
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      <MemberCard/>
-      </OwlCarousel>
+
+      {member.length &&<OwlCarousel className='owl-theme' {...values} >
+          {member.map((each)=>{
+              console.log(each)
+              return <MemberCard data={each}/>
+          })}
+     
+      </OwlCarousel>}
     
   </div>
 
    
-        </div>
+        </>
     )
 }
 

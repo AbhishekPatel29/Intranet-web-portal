@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 
-
-import MembersCorner from "./component/MembersCorner";
 import Login from './component/Login'
+import MembersCorner from "./component/MembersCorner";
+
 
 
 function App() {

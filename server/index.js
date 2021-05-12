@@ -50,7 +50,7 @@ app.get('/getuser',(req,res)=>{
         if(err)
         throw err;
         else{
-            res.json(result)
+            res.send(result)
         }
     })
 })
