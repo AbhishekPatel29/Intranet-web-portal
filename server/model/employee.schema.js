@@ -4,7 +4,10 @@ const employeeSchema= new Schema({
     name:String,
     profile:String,
     location:String,
+    discription:String,
     Date:String,
+    like:Number,
+    comment:Number
 });
 
 const Employee=mongoose.model("Employee",employeeSchema);

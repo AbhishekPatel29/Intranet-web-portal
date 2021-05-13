@@ -3,6 +3,8 @@
 }
 body{
     background-image: url('/src/images/login-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .logincontainer{
@@ -62,3 +64,17 @@ a:hover{
     background-color:black;
     color:white;
 }
+
+
+.message {
+    margin-top: 20px;
+    font-size: 17px; 
+  }
+  
+  .success {
+    color: blue;
+  }
+  
+  .error {
+    color: red;
+  }

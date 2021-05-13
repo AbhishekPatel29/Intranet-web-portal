@@ -54,7 +54,7 @@ function MembersCorner() {
        
     return (
         <><Navbar/>
-         <div clasName="container">
+         <div clasName="container" id="container">
       <div clasName="col-md-12">
           <h2 className="text-white align-left">Member's Corner</h2>
       </div>

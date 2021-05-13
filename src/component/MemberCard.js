@@ -14,10 +14,10 @@ function MemberCard(props) {
           />
           <div class="card-body">
             <div>
-              <strong>{props.data.name}</strong>&nbsp; <small>Presales</small>
+              <strong>{props.data.name}</strong>&nbsp; <small>{props.data.profile}</small>
               <div>
-                <span class="location">Pune</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="date">May,22,2020</span>
+                <span class="location"><i class="fas fa-map-marker-alt"></i>{props.data.location}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="date"><i class="far fa-calendar-alt"></i>{props.data.Date}</span>
               </div>
             </div>
             <p class="card-text">

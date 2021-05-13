@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import './Login.css'
 import logoWhite from '../images/logo-infobeans-white.svg';
@@ -8,11 +8,59 @@ const user={email:"abhishek@gmail.com",password:"abhishek123"}
 
 
 function Login() {
+  const [isValid, setIsValid] = useState(false);
+  const [message, setMessage] = useState('');
+  const [passError,setpassError]=useState()
+
   let history=useHistory();
   if(sessionStorage.token){
     history.push("/")
   }
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
+function validatePassword(password){
+    var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return re.test(password);
+}
+const checkEmail=(e)=>{
+  let email=e.target.value;
+  console.log(email.length)
+  if(!validateEmail(email)){
+    console.log("Invalid Email")
+    setIsValid(false);
+    setMessage('Please enter a valid email!');
+  }
+  else{
+    console.log("valid Email")
+    setIsValid(true);
+      setMessage('Your email looks good!');
+  }
+  if(email==0){
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    setMessage('');
+  }
+}
+const checkPassword=(e)=>{
+  let password=e.target.value;
+  console.log(password)
+  if(!validatePassword(password)){
+    console.log("Invalid Email")
+    setIsValid(false);
+    setpassError('Please enter a valid syntax');
+  }
+  else{
+    console.log("valid Email")
+    setIsValid(true);
+      setpassError('Your password looks good!');
+  }
+  if(password==0){
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    setpassError('');
+  }
+}
 const loginCheck=(e)=>{
   e.preventDefault()
   let email=e.target.elements[0].value;
@@ -62,7 +110,10 @@ const loginCheck=(e)=>{
           <div className="form-field">
             <label className="form-label">Email</label>
             <div className="form-field">
-              <input type="text" className="form-control" placeholder="Your InfoBeans email address" required />
+              <input type="text" className="form-control" placeholder="Your InfoBeans email address" onChange={(e)=>checkEmail(e)} required />
+              <div className={`message ${isValid ? 'success' : 'error'}`}>
+        {message}
+      </div>
             </div>
           </div>
           <div className="form-field">
@@ -70,7 +121,10 @@ const loginCheck=(e)=>{
               >Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <a href="#">Forgot?</a></label>
             <div className="form-field">
-              <input type="password"  className="form-control" placeholder="Your password" required />
+                 <input type="password"  className="form-control" placeholder="Your password" onChange={(e)=>checkPassword(e)} required />
+                <div className={`message ${isValid ? 'success' : 'error'}`}>
+                {passError}
+                </div>
             </div>
           </div>
           <div className="form-field">
