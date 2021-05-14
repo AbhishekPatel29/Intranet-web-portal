@@ -4,7 +4,7 @@ import './Login.css'
 import logoWhite from '../images/logo-infobeans-white.svg';
 import logoBlack from '../images/logo-infobeans-black.svg';
 
-const user={email:"abhishek@gmail.com",password:"abhishek123"}
+const user={email:"abhishek@gmail.com",password:"Abhishek@123"}
 
 
 function Login() {
@@ -25,7 +25,9 @@ function validatePassword(password){
     var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return re.test(password);
 }
+// email validation using regex
 const checkEmail=(e)=>{
+  e.preventDefault()
   let email=e.target.value;
   console.log(email.length)
   if(!validateEmail(email)){
@@ -43,13 +45,15 @@ const checkEmail=(e)=>{
     setMessage('');
   }
 }
+//password validation using regex
 const checkPassword=(e)=>{
+  e.preventDefault()
   let password=e.target.value;
   console.log(password)
   if(!validatePassword(password)){
     console.log("Invalid Email")
     setIsValid(false);
-    setpassError('Please enter a valid syntax');
+    setpassError('Invalid Password min 8 letter password, with at least a symbol, upper and lower case letters and a number');
   }
   else{
     console.log("valid Email")

@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
-const app = express();
+const bcrypt=require("bcrypt")
 const mongoose=require("mongoose");
-const Employee = require('./model/employee.schema');
 
+const Router=require('./route/route')
+const app = express();
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -34,23 +35,15 @@ mongoose.connect("mongodb://localhost:27017/users",{
     console.log("Database connected")
 })
 
-app.post('/user',(req,res)=>{
-    const Employeedata= new Employee(req.body);
-    Employeedata.save()
-    .then(()=>{
-        res.status(200).send(Employeedata)
-    })
-    .catch((e)=>{
-        res.status(400).send(e)
-    })
-})
 
-app.get('/getuser',(req,res)=>{
-    Employee.find({},(err,result)=>{
-        if(err)
-        throw err;
-        else{
-            res.send(result)
-        }
-    })
-})
+
+// app.post("/register",async(req,res)=>{
+//     try{
+//         const salt= await bcrypt.genSalt(10)
+//         const  hashPassword= await bcrypt.hash(req.body.password,salt)
+//     }
+// catch{
+
+// }
+// })
+app.use('/api',Router)
