@@ -5,6 +5,6 @@ const memberController=require('../controller/memberController')
 router.post('/user',memberController.memberdata);
 router.get('/getuser',memberController.getmember);
 router.post('/register',memberController.register);
-
+router.post('/login',memberController.login)
 
 module.exports=router

@@ -1,6 +1,8 @@
 const Employee = require("../model/employee.schema");
 const Login=require("../model/login.Schema")
 const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
+const secretKey="sdvsjdnvjsdvbjbvssafdsa"
 memberdata=(req,res)=>{
     const Employeedata= new Employee(req.body);
     Employeedata.save()
@@ -37,7 +39,21 @@ newemp.save()
 
 
 }
+login=async(req,res)=>{
+    email=req.body.email
+    password=req.body.password
+    const user=await Login.findOne({email}).lean()
+    
+    if(!user){
+        return res.json({status:'error',error:'Invalid email and password'})
+      }
+      if(bcrypt.compare(password,user.password)){
+        const token = jwt.sign({id:user._id,email:user.email},secretKey)
+    
+        return res.json({status:'ok',token: token})
+}
+}
 
 
 
-module.exports={ memberdata,getmember,register}
+module.exports={ memberdata,getmember,register,login}

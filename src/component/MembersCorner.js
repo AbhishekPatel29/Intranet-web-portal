@@ -23,7 +23,7 @@ function MembersCorner() {
          console.log("hello")
         axios({
             method:'get',
-            url:"http://localhost:3005/getuser"
+            url:"http://localhost:3005/api/getuser"
         }).then((response)=>{
             console.log(response.data)
             setmember(response.data)

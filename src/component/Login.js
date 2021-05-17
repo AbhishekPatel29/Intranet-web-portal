@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import './Login.css'
 import logoWhite from '../images/logo-infobeans-white.svg';
 import logoBlack from '../images/logo-infobeans-black.svg';
+import axios from 'axios';
 
 const user={email:"abhishek@gmail.com",password:"Abhishek@123"}
 
@@ -69,14 +70,27 @@ const loginCheck=(e)=>{
   e.preventDefault()
   let email=e.target.elements[0].value;
   let password=e.target.elements[1].value;
-  if(email===user.email && password===user.password){
-    console.log("true")
-    sessionStorage.setItem("token",email)
-     history.push("/membersCorner")
+
+  axios.post('http://localhost:3005/api/login',{email:email,password:password})
+  .then((response)=>{
+  console.log(response.data.token)
+  if(response.data.token){
+    sessionStorage.setItem("token",response.data.token)
+    history.push("/membersCorner")
   }
   else{
-    alert("false")
+    alert("invalid credential")
   }
+
+})
+  // if(email===user.email && password===user.password){
+  //   console.log("true")
+  //   sessionStorage.setItem("token",email)
+  //    history.push("/membersCorner")
+  // }
+  // else{
+  //   alert("false")
+  // }
 }
     return (
     
