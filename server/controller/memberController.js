@@ -2,9 +2,27 @@ const Employee = require("../model/employee.schema");
 const Login=require("../model/login.Schema")
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+
+
+
+
+//secret key for jwt token
 const secretKey="sdvsjdnvjsdvbjbvssafdsa"
+
+//api for inserting employee data
 memberdata=(req,res)=>{
-    const Employeedata= new Employee(req.body);
+    const Employeedata= new Employee(
+        {
+            image: req.file.filename,
+            name: req.body.name,
+            profile: req.body.profile,
+            location: req.body.location,
+            discription: req.body.discription,
+            Date: req.body.Date,
+            like: req.body.like,
+            comment: req.body.comment,
+          }
+    );
     Employeedata.save()
     .then(()=>{
         res.status(200).send(Employeedata)
@@ -13,6 +31,7 @@ memberdata=(req,res)=>{
         res.status(400).send(e)
     })
 }
+//api for fetching employee data
 getmember=(req,res)=>{
     Employee.find({},(err,result)=>{
         if(err)
@@ -22,6 +41,8 @@ getmember=(req,res)=>{
         }
     })
 }
+
+//api for registering user
 register=async(req,res)=>{
 const salt=await bcrypt.genSalt(10);
 

@@ -17,3 +17,11 @@ background-color: #ea1b3c;
 
 
 }
+.btn{
+    height:30px;
+    width:80px;
+    padding-bottom: 30px;
+    border-radius: 50px;
+    text-align: center;
+    align-items: center;
+}

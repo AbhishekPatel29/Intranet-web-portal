@@ -1,8 +1,13 @@
 import React from 'react'
 import './Navbar.css'
 import logoWhite from '../images/logo-infobeans-white.svg';
+import { useHistory } from 'react-router';
 function Navbar() {
- 
+  let history=useHistory()
+ const logout=()=>{
+   sessionStorage.clear()
+   history.push('/')
+ }
     return (
         <>
          <div class="header">
@@ -36,6 +41,9 @@ function Navbar() {
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Jobs</a>
+                  </li>
+                  <li class="nav-item">
+                  <button type="button" class="btn btn-danger" onClick={logout}>Logout</button>
                   </li>
                   <li class="nav-item text-white">
                     <i class="fas fa-th fa-2x"></i>

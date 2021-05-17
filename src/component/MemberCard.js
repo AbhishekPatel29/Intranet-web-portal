@@ -8,7 +8,7 @@ function MemberCard(props) {
            <div class="item">
         <div class="card" style={{width: '18rem'}}>
           <img
-            src={img}
+            src={props.data.image}
             class="card-img-top"
             alt="..."
           />
@@ -21,11 +21,10 @@ function MemberCard(props) {
               </div>
             </div>
             <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+              {props.data.discription}
             </p>
-            <div><span><i class="far fa-thumbs-up"></i>65</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="far fa-comment"></i>65</span></div>
+            <div><span><i class="far fa-thumbs-up"></i>{props.data.like}</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="far fa-comment"></i>{props.data.comment}</span></div>
             
           </div>
         </div>
