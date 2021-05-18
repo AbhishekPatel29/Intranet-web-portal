@@ -1,5 +1,7 @@
 #container{
-    margin: 40px !important;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 50px;
     width: inherit;
 }
 .card{

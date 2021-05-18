@@ -14,16 +14,19 @@ function MembersCorner() {
 
 
     let history=useHistory()
-    if(!sessionStorage.token){
-        history.push("/login")
-      }
+    // if(!sessionStorage.token){
+    //     history.push("/login")
+    //   }
      const[member,setmember]=useState([])
      
      useEffect(() => {
          console.log("hello")
         axios({
             method:'get',
-            url:"http://localhost:3005/api/getuser"
+            url:"http://localhost:3005/api/getuser",
+            headers : {
+                'Authorization': `token ${sessionStorage.token }`
+            }
         }).then((response)=>{
             console.log(response.data)
             setmember(response.data)

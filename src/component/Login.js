@@ -5,7 +5,7 @@ import logoWhite from '../images/logo-infobeans-white.svg';
 import logoBlack from '../images/logo-infobeans-black.svg';
 import axios from 'axios';
 
-const user={email:"abhishek@gmail.com",password:"Abhishek@123"}
+// const user={email:"abhishek@gmail.com",password:"Abhishek@123"}
 
 
 function Login() {
@@ -39,9 +39,9 @@ const checkEmail=(e)=>{
   else{
     console.log("valid Email")
     setIsValid(true);
-      setMessage('Your email looks good!');
+      setMessage('');
   }
-  if(email==0){
+  if(email===0){
     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
     setMessage('');
   }
@@ -59,9 +59,9 @@ const checkPassword=(e)=>{
   else{
     console.log("valid Email")
     setIsValid(true);
-      setpassError('Your password looks good!');
+      setpassError('');
   }
-  if(password==0){
+  if(password===0){
     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
     setpassError('');
   }
@@ -96,7 +96,7 @@ const loginCheck=(e)=>{
     
     <div className="logincontainer">
       <div className="header">
-        <nav className="navbar  navbar-light">
+        <nav className="navbar sticky-top navbar-light">
           <div className="container-fluid">
             <a className="navbar-brand text-white" href="#">
               <img

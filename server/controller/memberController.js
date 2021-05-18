@@ -44,22 +44,44 @@ getmember=(req,res)=>{
 
 //api for registering user
 register=async(req,res)=>{
+    const email=req.body.email
+    const password=req.body.password
+    if(!email || typeof email !=='string'){
+        console.log(email,password)
+        return res.json({status:'error',error:'Invalid email'})
+    }
+
+    if(!password || typeof password !=='string'){
+        return res.json({status:'error',error:'Invalid password'})
+    }
+
+    if(password.length<7){
+        return res.json({status:'error',error:'Password should be atleast 7 character'})
+    }
+
 const salt=await bcrypt.genSalt(10);
 
 const hashpassword=await bcrypt.hash(req.body.password,salt)
-const email=req.body.email
-const newemp=Login({
+try{
+const newemp= await Login.create({
 email:email,
 password:hashpassword
 })
-newemp.save()
-.then(()=>{
-    res.status(200).send(newemp)
-})
 
 
-
+console.log("User Created Successfully",newemp)
 }
+catch(error){
+    console.log(JSON.stringify(error) )
+    if(error.code===11000){
+        return res.json({status:'error',error:'Email already in use'});
+    }  
+}
+res.json({status:'ok',message:'Registered Successfully'});
+}
+
+
+
 login=async(req,res)=>{
     email=req.body.email
     password=req.body.password
