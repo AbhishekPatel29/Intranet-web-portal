@@ -3,7 +3,15 @@ const Login=require("../model/login.Schema")
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken');
 const Contact = require("../model/contact.schema");
+const nodemailer=require('nodemailer')
 
+var transporter=nodemailer.createTransport({
+  service:'gmail',
+  auth:{
+    user:"29abhishek.p@gmail.com",
+    pass:'abhishek@29'
+  }
+})
 
 
 
@@ -99,6 +107,13 @@ login=async(req,res)=>{
 }
 //api for contactus 
 contactus=async(req,res)=>{
+    var id=req.body.email
+    var mail={
+        from:'29abhishek.p@gmail.com',
+        to: id,
+        subject:'hey',
+        text:'hello,how are you'
+      };
     try{
         const contact= await Contact.create({
         firstname:req.body.firstname,
@@ -108,6 +123,16 @@ contactus=async(req,res)=>{
         file:req.body.file,
     })
     console.log(contact)
+    transporter.sendMail(mail,(error,info)=>{
+        if(error){
+          console.log(error)
+      
+        }
+        else{
+          console.log("mail send")
+          res.json({status:'ok',message:'Registered Successfully mail send'});
+        }
+      })
 }
 catch(error){
     console.log(JSON.stringify(error) )
@@ -115,7 +140,9 @@ catch(error){
         return res.json({status:'error',error:'Email already in use'});
     }  
 }
-res.json({status:'ok',message:'Registered Successfully'});
+
+
+
 }
 
 
