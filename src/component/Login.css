@@ -1,14 +1,14 @@
 .navbar{
     background-color: #3a3537;
 }
-body{
+/* body{
+   
+} */
+
+.logincontainer{
     background-image: url('/src/images/login-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.logincontainer{
-   
     flex: 1 1 auto;
     backface-visibility: hidden;
     display: flex;
@@ -51,7 +51,7 @@ a:hover{
 /* .form-field1{
     padding-left: inherit;
 } */
-.button{
+#button{
    background-color: #ea1b3c;
    border:1px solid #ea1b3c;
    color: white;
@@ -59,7 +59,7 @@ a:hover{
    width: 100%;
 }
 
-.button:hover{
+#button:hover{
     border: 0px;
     background-color:black;
     color:white;

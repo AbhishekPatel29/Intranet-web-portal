@@ -1,7 +1,8 @@
 const Employee = require("../model/employee.schema");
 const Login=require("../model/login.Schema")
 const bcrypt=require('bcrypt')
-const jwt=require('jsonwebtoken')
+const jwt=require('jsonwebtoken');
+const Contact = require("../model/contact.schema");
 
 
 
@@ -96,7 +97,39 @@ login=async(req,res)=>{
         return res.json({status:'ok',token: token})
 }
 }
+//api for contactus 
+contactus=async(req,res)=>{
+    try{
+        const contact= await Contact.create({
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        email:req.body.email,
+        description:req.body.description,
+        file:req.body.file,
+    })
+    console.log(contact)
+}
+catch(error){
+    console.log(JSON.stringify(error) )
+    if(error.code===11000){
+        return res.json({status:'error',error:'Email already in use'});
+    }  
+}
+res.json({status:'ok',message:'Registered Successfully'});
+}
+
+
+//api for fetching contactus data
+getContactUs=(req,res)=>{
+    Contact.find({},(err,result)=>{
+        if(err)
+        throw err;
+        else{
+            res.send(result)
+        }
+    })
+}
 
 
 
-module.exports={ memberdata,getmember,register,login}
+module.exports={ memberdata,getmember,register,login,contactus,getContactUs}

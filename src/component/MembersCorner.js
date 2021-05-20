@@ -14,9 +14,9 @@ function MembersCorner() {
 
 
     let history=useHistory()
-    // if(!sessionStorage.token){
-    //     history.push("/login")
-    //   }
+    if(!sessionStorage.token){
+        history.push("/login")
+      }
      const[member,setmember]=useState([])
      
      useEffect(() => {

@@ -3,7 +3,7 @@ import './App.css';
 
 import Login from './component/Login'
 import MembersCorner from "./component/MembersCorner";
-
+import ContactForm from './component/ContactForm'
 
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
         <Switch>
           <Route path="/membersCorner" component={MembersCorner} />
           <Route path="/login" component={Login} />
-          <Route path="/" component={MembersCorner} />
+          {/* <Route path="/" component={MembersCorner} /> */}
+          <Route path="/" component={ContactForm} />
         </Switch>
       </Router>
     </div>

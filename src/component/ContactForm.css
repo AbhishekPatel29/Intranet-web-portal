@@ -1,0 +1,28 @@
+.container{
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+   margin-top: 50px;
+   display: flex;
+    flex-direction: column;
+  
+}
+.form{
+    max-width:400px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.submitbutton{
+    text-align: center;
+}
+
+div>.btn{
+    margin-top: 20px;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}

@@ -146,7 +146,7 @@ const loginCheck=(e)=>{
             </div>
           </div>
           <div className="form-field">
-                    <button className="button inverse full-width" >Login to Intranet Portal</button>
+                    <button id="button" className="button inverse full-width" >Login to Intranet Portal</button>
                 </div>
                 </form>
         </div>

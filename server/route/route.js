@@ -40,5 +40,6 @@ router.post('/user',upload,memberController.memberdata);
 router.get('/getuser',authenticateToken,memberController.getmember);
 router.post('/register',memberController.register);
 router.post('/login',memberController.login)
-
+router.post('/contactus',memberController.contactus)
+router.get('/getContactUs',memberController.getContactUs)
 module.exports=router
