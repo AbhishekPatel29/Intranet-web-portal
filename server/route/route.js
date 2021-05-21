@@ -27,7 +27,7 @@ const authenticateToken=(req,res,next)=>{
 //multer config
 var Storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../../intranet/public')
+      cb(null, '../../intranet/public/upload /image')
     },
     filename: (req, file, cb)=> {
       cb(null, + Date.now() + path.extname(file.originalname));
@@ -37,11 +37,21 @@ var Storage = multer.diskStorage({
   //multer middleware
 var upload = multer({ storage: Storage }).single('image')
 
+//multer config for contact us
+var contact_storage=multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,'../../intranet/public/upload/contact')
+  },filename:(req,file,cb)=>{
+    cb(null,+Date.now()+path.extname(file.originalname))
+  }
+})
+
+var contact_upload=multer({storage:contact_storage}).single('file')
 
 router.post('/user',upload,memberController.memberdata);
 router.get('/getuser',authenticateToken,memberController.getmember);
 router.post('/register',memberController.register);
 router.post('/login',memberController.login)
-router.post('/contactus',memberController.contactus)
+router.post('/contactus',contact_upload,memberController.contactus)
 router.get('/getContactUs',memberController.getContactUs)
 module.exports=router

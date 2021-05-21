@@ -120,7 +120,7 @@ contactus=async(req,res)=>{
         lastname:req.body.lastname,
         email:req.body.email,
         description:req.body.description,
-        file:req.body.file,
+        file:req.body.filename,
     })
     console.log(contact)
     transporter.sendMail(mail,(error,info)=>{
