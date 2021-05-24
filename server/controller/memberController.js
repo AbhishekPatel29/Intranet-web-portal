@@ -22,7 +22,7 @@ const secretKey="sdvsjdnvjsdvbjbvssafdsa"
 memberdata=(req,res)=>{
     const Employeedata= new Employee(
         {
-            image: req.file.filename,
+            image: './upload/image/'+req.file.filename,
             name: req.body.name,
             profile: req.body.profile,
             location: req.body.location,
@@ -108,11 +108,16 @@ login=async(req,res)=>{
 //api for contactus 
 contactus=async(req,res)=>{
     var id=req.body.email
+    var firstname=req.body.firstname
+    var attachment=req.file.filename
+    console.log(attachment)
     var mail={
         from:'29abhishek.p@gmail.com',
         to: id,
-        subject:'hey',
-        text:'hello,how are you'
+        cc:["aayush.sharma@infobeans.com","abhishek.patel@infobeans.com"],
+        subject:'Test Email',
+        text:'Hey '+firstname+' Our team will Contact you',
+        attachments: [{filename: attachment,path:'../../intranet/public/upload/contact/'+attachment,contentType: 'application/pdf'}]
       };
     try{
         const contact= await Contact.create({
@@ -120,7 +125,7 @@ contactus=async(req,res)=>{
         lastname:req.body.lastname,
         email:req.body.email,
         description:req.body.description,
-        file:req.body.filename,
+        file:req.file.filename,
     })
     console.log(contact)
     transporter.sendMail(mail,(error,info)=>{

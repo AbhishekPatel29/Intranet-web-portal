@@ -1,25 +1,41 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ContactForm.css'
 
-const contact=(e)=>{
-  e.preventDefault()
-  let firstname=e.target[0].value
-  let lastname=e.target[1].value
-  let email=e.target[2].value
-  let description=e.target[3].value
-  let file=e.target[4].value
-  console.log(firstname)
-    axios.post('http://localhost:3005/api/contactus',{firstname:firstname,lastname:lastname,email:email,description:description,file:file})
-    .then((res)=>{
-      console.log(res.data)
-  })
-  }
+
 function ContactForm() {
+const [file,setfile]=useState([])
+// useEffect(()=>{},[])
+  const contact=(e)=>{
+
+  setfile(e.target[4].files[0])
+  console.log(e.target[4].files[0])
+    e.preventDefault()
+   
+    const data =new FormData()
+    data.append("firstname",e.target[0].value)
+    data.append("lastname",e.target[1].value)
+    data.append("email",e.target[2].value)
+    data.append("description",e.target[3].value)
+    data.append("file",file)
+  
+    console.log(data)
+    //api to see form data
+    // axios.post("https:httpbin.org/anything", data).then(
+    //     (response) => {
+    //       console.log(response);
+    //     },
+    //     (error) => console.log(error)
+    //   );
 
 
+      axios.post('http://localhost:3005/api/contactus',data)
+      .then((res)=>{
+        console.log(res.data)
+    })
+    }
     return (
-      <div className="container">
+      <div className="container" id="contact-container">
         <h3>Contact Us</h3>
         <form   className="form" onSubmit={contact} encType="multipart/form-data">
           <div>
@@ -30,6 +46,7 @@ function ContactForm() {
               type="text"
               className="form-control"
               placeholder="First Name"
+              required
             />
           </div>
           <div>
@@ -40,19 +57,20 @@ function ContactForm() {
               type="text"
               className="form-control"
               placeholder="Last Name"
+              required
             />
           </div>
           <div>
             <label for="formControlInput" className="form-label">
               Email
             </label>
-            <input type="text" className="form-control" placeholder="email" />
+            <input type="text" className="form-control" placeholder="email" required />
           </div>
           <div>
             <label for="formControlInput" className="form-label">
               Description
             </label>
-            <textarea className="form-control" placeholder="description" id="floatingTextarea" style={{"height": "100px"}}></textarea>
+            <textarea className="form-control" placeholder="description" id="floatingTextarea" style={{"height": "100px"}} required></textarea>
           </div>
 
           <div>

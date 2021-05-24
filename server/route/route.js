@@ -27,7 +27,7 @@ const authenticateToken=(req,res,next)=>{
 //multer config
 var Storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../../intranet/public/upload /image')
+      cb(null, '../../intranet/public/upload/image')
     },
     filename: (req, file, cb)=> {
       cb(null, + Date.now() + path.extname(file.originalname));
@@ -46,7 +46,9 @@ var contact_storage=multer.diskStorage({
   }
 })
 
-var contact_upload=multer({storage:contact_storage}).single('file')
+var contact_upload=multer({storage:contact_storage,limits: {
+  fileSize: 1024 * 1024 * 5, // max 5 MB
+}}).single('file')
 
 router.post('/user',upload,memberController.memberdata);
 router.get('/getuser',authenticateToken,memberController.getmember);

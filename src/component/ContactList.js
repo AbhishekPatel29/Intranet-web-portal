@@ -23,7 +23,7 @@ function ContactList() {
     
     },[])
     return (
-        <div id="container" className0="container">
+        <div id="container" className="container">
             <table className="table table-striped">
   <thead>
     <tr>
@@ -32,6 +32,7 @@ function ContactList() {
       <th scope="col">Last Name</th>
       <th scope="col">Email</th>
       <th scope="col">Description</th>
+      <th scope="col">File</th>
     </tr>
   </thead>
   <tbody>

@@ -15,7 +15,7 @@ function App() {
           <Route path="/membersCorner" component={MembersCorner} />
           <Route path="/login" component={Login} />
           {/* <Route path="/" component={MembersCorner} /> */}
-          {/* <Route path="/" component={ContactForm} /> */}
+          <Route exact path="/" component={ContactForm} />
           <Route exact path="/contactlist" component={ContactList} />
         </Switch>
       </Router>
