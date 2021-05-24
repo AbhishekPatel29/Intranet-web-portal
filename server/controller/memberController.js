@@ -108,18 +108,35 @@ login=async(req,res)=>{
 //api for contactus 
 contactus=async(req,res)=>{
     var id=req.body.email
-    var firstname=req.body.firstname
-    var attachment=req.file.filename
-    console.log(attachment)
-    var mail={
-        from:'29abhishek.p@gmail.com',
-        to: id,
-        cc:["aayush.sharma@infobeans.com","abhishek.patel@infobeans.com"],
-        subject:'Test Email',
-        text:'Hey '+firstname+' Our team will Contact you',
-        attachments: [{filename: attachment,path:'../../intranet/public/upload/contact/'+attachment,contentType: 'application/pdf'}]
-      };
+        var firstname=req.body.firstname
+        var attachment=req.file.filename
+        console.log("hey"+attachment)
+        var mail={
+            from:'29abhishek.p@gmail.com',
+            to: id,
+            subject:'Test Email',
+            text:'Hey '+firstname+' Our team will Contact you',
+            attachments: [{filename: attachment,path:'../../intranet/public/upload/contact/'+attachment,contentType: 'application/pdf'}]
+          };
+         var admin={
+            from:'29abhishek.p@gmail.com',
+            to: ["aayush.sharma@infobeans.com","abhishek.patel@infobeans.com"],
+            subject:"New user registered",
+            text:'Hey ',
+            html: `
+            <h1>A New User Registered</h1>
+            <h2>Information</h2>
+            <ul>
+            <li>First Name : ${req.body.firstname}</li>
+            <li>Last Name : ${req.body.lastname}</li>
+            <li>Email : ${req.body.email}</li>
+            <li>Description : ${req.body.description}</li>
+            </ul>
+            `, 
+            attachments: [{filename: attachment,path:'../../intranet/public/upload/contact/'+attachment,contentType: 'application/pdf'}]
+         } 
     try{
+       
         const contact= await Contact.create({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
@@ -136,6 +153,16 @@ contactus=async(req,res)=>{
         else{
           console.log("mail send")
           res.json({status:'ok',message:'Registered Successfully mail send'});
+        }
+      })
+      transporter.sendMail(admin,(error,info)=>{
+        if(error){
+          console.log(error)
+      
+        }
+        else{
+          console.log("Admin mail send")
+          res.json({status:'ok',message:'Registered Successfully mail send to Admin'});
         }
       })
 }

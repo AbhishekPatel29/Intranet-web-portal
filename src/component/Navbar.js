@@ -2,6 +2,7 @@ import React from 'react'
 import './Navbar.css'
 import logoWhite from '../images/logo-infobeans-white.svg';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 function Navbar() {
   let history=useHistory()
  const logout=()=>{
@@ -25,8 +26,9 @@ function Navbar() {
               </a>
               <ul class="nav justify-content-end">
                 <li class="nav-item">
-                  <a class="nav-link " aria-current="page" href="#">Home</a>
-                </li>
+                <Link to="/membersCorner">
+                    <a class="nav-link" href="#">Home</a></Link>
+                  </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Message Board</a>
                 </li>
@@ -37,10 +39,11 @@ function Navbar() {
                     <a class="nav-link" href="#">Applauds</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Gallery</a>
+                    <Link to="/contactus"><a class="nav-link" href="#">Contact Us</a></Link>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Jobs</a>
+                    <Link to="/contactlist">
+                    <a class="nav-link" href="#">Contact List</a></Link>
                   </li>
                   <li class="nav-item">
                   <button type="button" class="btn btn-danger" onClick={logout}>Logout</button>

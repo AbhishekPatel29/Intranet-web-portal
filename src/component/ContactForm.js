@@ -1,17 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './ContactForm.css'
-
+import Navbar from './Navbar'
 
 function ContactForm() {
 const [file,setfile]=useState([])
 // useEffect(()=>{},[])
   const contact=(e)=>{
-
-  setfile(e.target[4].files[0])
-  console.log(e.target[4].files[0])
     e.preventDefault()
-   
+
+  console.log(e.target[4].files[0])
+    
+   if(e.target[4].files[0].name){
     const data =new FormData()
     data.append("firstname",e.target[0].value)
     data.append("lastname",e.target[1].value)
@@ -28,13 +28,19 @@ const [file,setfile]=useState([])
     //     (error) => console.log(error)
     //   );
 
-
+ 
       axios.post('http://localhost:3005/api/contactus',data)
       .then((res)=>{
         console.log(res.data)
-    })
+    })}
     }
-    return (
+const updatefile=(e)=>{
+e.preventDefault()
+console.log(e.target.files[0])
+setfile(e.target.files[0])
+}
+    return (<>
+      <Navbar/>
       <div className="container" id="contact-container">
         <h3>Contact Us</h3>
         <form   className="form" onSubmit={contact} encType="multipart/form-data">
@@ -77,7 +83,7 @@ const [file,setfile]=useState([])
             <label for="formFile" className="form-label text-start">
               Default file input
             </label>
-            <input className="form-control" type="file" id="formFile" />
+            <input className="form-control" type="file" id="formFile" onChange={updatefile} />
           </div>
 
           <div className="submitbutton">
@@ -87,6 +93,7 @@ const [file,setfile]=useState([])
           </div>
         </form>
       </div>
+      </>
     );
 }
 

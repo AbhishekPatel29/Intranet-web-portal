@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './ContactList.css'
-
+import Navbar from './Navbar'
 
 
 
@@ -23,10 +23,12 @@ function ContactList() {
     
     },[])
     return (
+      <>
+      <Navbar/>
         <div id="container" className="container">
-            <table className="table table-striped">
+            <table className="table table-hover table-bordered">
   <thead>
-    <tr>
+    <tr class="table-dark">
      
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
@@ -38,7 +40,7 @@ function ContactList() {
   <tbody>
     {contact.map((each)=>{
        return( 
-       <tr>
+       <tr class="table-light">
       
       <td>{each.firstname}</td>
       <td>{each.lastname}</td>
@@ -52,6 +54,7 @@ function ContactList() {
   </tbody>
 </table>
         </div>
+        </>
     )
 }
 
